@@ -14,17 +14,17 @@ The floating IP configuration is handled in the setup_cluster.sh script for the 
 In the setup the pcs resource create FloatingIP command ensures that the floating IP address 172.20.0.5 is monitored and managed by Pacemaker. If the node currently hosting the floating IP goes down, Pacemaker will automatically transfer the floating IP to another node in the cluster. This is made possible by the high availability configuration and the monitoring interval specified (30 seconds).
 
 # Installation Steps
-Clone the Project:
+# Clone the Project:
 `$ git clone https://github.com/yourusername/pacemaker-corosync-docker.git`
 `$ cd pacemaker-corosync-docker`
 
-Run Docker Compose:
+# Run Docker Compose:
 `$ docker-compose up --build -d`
 
-Access the Jenkins Container (webz-004):
+# Access the Jenkins Container (webz-004):
 `$ docker exec -it webz-004 bash`
 
-Install MySQL Client in Jenkins Container:
+# Install MySQL Client in Jenkins Container:
 `$ apt update && apt install default-mysql-client -y`
 
-Ensure that Jenkins is running and accessible via http://localhost:8080.
+# Ensure that Jenkins is running and accessible via http://localhost:8080.
