@@ -1,9 +1,0 @@
-Started by user unknown or anonymous
-Running as SYSTEM
-Building in workspace /var/jenkins_home/workspace/check-active-node
-[check-active-node] $ /bin/bash /tmp/jenkins4857321774177168781.sh
-curl: unknown --write-out variable: 'response_header:X-Node-IP'
-Junior DevOps Engineer - Home Task
-
-Container: 200 
-Finished: SUCCESS
