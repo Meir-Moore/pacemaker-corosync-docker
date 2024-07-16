@@ -16,6 +16,7 @@ In the setup the pcs resource create FloatingIP command ensures that the floatin
 # Installation Steps
 # Clone the Project:
 `$ git clone https://github.com/yourusername/pacemaker-corosync-docker.git`
+``
 `$ cd pacemaker-corosync-docker`
 
 # Run Docker Compose:
@@ -27,4 +28,4 @@ In the setup the pcs resource create FloatingIP command ensures that the floatin
 # Install MySQL Client in Jenkins Container:
 `$ apt update && apt install default-mysql-client -y`
 
-# Ensure that Jenkins is running and accessible via http://localhost:8080.
+Ensure that Jenkins is running and accessible via http://localhost:8080.
