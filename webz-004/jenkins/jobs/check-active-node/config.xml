@@ -1,0 +1,70 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.scm.NullSCM"/>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers>
+    <hudson.triggers.TimerTrigger>
+      <spec>H/5 * * * *</spec>
+    </hudson.triggers.TimerTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>#!/bin/bash
+
+FLOATING_IP=&quot;http://172.20.0.5&quot;
+LOG_FILE=&quot;/var/jenkins_home/active_node.log&quot;
+
+# Define IP to container name mapping
+declare -A IP_TO_NAME
+IP_TO_NAME[&quot;172.20.0.2&quot;]=&quot;webz-001&quot;
+IP_TO_NAME[&quot;172.20.0.3&quot;]=&quot;webz-002&quot;
+IP_TO_NAME[&quot;172.20.0.4&quot;]=&quot;webz-003&quot;
+
+# Get the current runtime
+RUNTIME=$(date &apos;+%Y-%m-%d %H:%M:%S&apos;)
+
+# Send the cURL command to fetch the headers
+HEADER_OUTPUT=$(curl -sI -H &quot;Host: 172.20.0.5&quot; $FLOATING_IP)
+
+# Extract the X-Node-IP header value
+NODE_IP=$(echo &quot;$HEADER_OUTPUT&quot; | grep -i &quot;X-Node-IP&quot; | awk &apos;{print $2}&apos; | tr -d &apos;\r&apos;)
+
+# Send the cURL command to fetch the content
+CONTENT=$(curl -s $FLOATING_IP)
+
+# Resolve IP to name
+CONTAINER_NAME=${IP_TO_NAME[$NODE_IP]}
+
+# Log the output
+echo &quot;$CONTENT&quot; &gt;&gt; $LOG_FILE
+echo &quot;$RUNTIME&quot; &gt;&gt; $LOG_FILE
+echo &quot;Container: $CONTAINER_NAME&quot; &gt;&gt; $LOG_FILE
+echo &quot;------------------------&quot; &gt;&gt; $LOG_FILE
+
+# Save the output to the active node&apos;s database
+MYSQL_USER=&quot;root&quot;
+MYSQL_PASSWORD=&quot;mypassword&quot;
+MYSQL_DB=&quot;webziodb&quot;
+MYSQL_TABLE=&quot;mytable&quot;
+
+mysql -h &quot;$NODE_IP&quot; -u &quot;$MYSQL_USER&quot; -p&quot;$MYSQL_PASSWORD&quot; -e &quot;USE $MYSQL_DB; INSERT INTO $MYSQL_TABLE (content, runtime, container_name) VALUES (&apos;$CONTENT&apos;, &apos;$RUNTIME&apos;, &apos;$CONTAINER_NAME&apos;);&quot;
+
+# Print the output
+echo &quot;$CONTENT&quot;
+echo &quot;$RUNTIME&quot;
+echo &quot;Container: $CONTAINER_NAME&quot;
+</command>
+      <configuredLocalRules/>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers/>
+  <buildWrappers/>
+</project>

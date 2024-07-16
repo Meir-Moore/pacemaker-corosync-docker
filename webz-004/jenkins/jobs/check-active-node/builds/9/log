@@ -1,0 +1,8 @@
+Started by timer
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/check-active-node
+[check-active-node] $ /bin/bash /tmp/jenkins16764873087085465026.sh
+Junior DevOps Engineer - Home Task
+2024-07-16 19:58:00
+Container: webz-001
+Finished: SUCCESS
