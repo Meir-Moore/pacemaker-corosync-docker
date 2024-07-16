@@ -4,7 +4,7 @@ This repository contains a Docker-based setup for managing a multi-node cluster 
 
 # Command for Floating IP Configuration
 The floating IP configuration is handled in the setup_cluster.sh script for the initial node. The relevant command in the script is:
-$ `pcs resource create FloatingIP ocf:heartbeat:IPaddr2 ip=172.20.0.5 cidr_netmask=32 nic=eth0 op monitor interval=30s`
+ `$ pcs resource create FloatingIP ocf:heartbeat:IPaddr2 ip=172.20.0.5 cidr_netmask=32 nic=eth0 op monitor interval=30s`
 1. Creates a floating IP resource: The resource is named FloatingIP.
 2. Resource type: The resource type is ocf:heartbeat:IPaddr2.
 3. IP Address: The floating IP address is set to 172.20.0.5.
