@@ -16,7 +16,8 @@ In the setup the pcs resource create FloatingIP command ensures that the floatin
 # Installation Steps
 # Clone the Project:
 `$ git clone https://github.com/yourusername/pacemaker-corosync-docker.git`
-``
+
+Change directory to the project:
 `$ cd pacemaker-corosync-docker`
 
 # Run Docker Compose:
