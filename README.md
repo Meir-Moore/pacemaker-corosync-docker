@@ -74,5 +74,5 @@ docker exec -it webz-002 mysql -u root -pmypassword -e "USE webziodb; SELECT * F
 docker exec -it webz-003 mysql -u root -pmypassword -e "USE webziodb; SELECT * FROM mytable;"
 ```
 
-Configuration
+## Configuration
 You can customize the cluster configuration by modifying the configuration files located in the config directory. After making changes, restart the Docker containers to apply the new configuration.
