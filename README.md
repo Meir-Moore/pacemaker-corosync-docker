@@ -39,7 +39,7 @@ pcs resource create FloatingIP ocf:heartbeat:IPaddr2 ip=172.20.0.5 cidr_netmask=
 ### Apache Configuration
 Each node's Apache server is configured to display custom headers for identifying the node:
 ```bash
-echo 'Header set X-Node-IP "172.20.0.2"' >> /etc/apache2/sites-available/000-default.conf
+echo 'Header set X-Node-IP "<container ip>"' >> /etc/apache2/sites-available/000-default.conf
 service apache2 restart
 ```
 ### Jenkins Job
