@@ -75,4 +75,17 @@ docker exec -it webz-003 mysql -u root -pmypassword -e "USE webziodb; SELECT * F
 ```
 
 ## Configuration
-You can customize the cluster configuration by modifying the configuration files located in the config directory. After making changes, restart the Docker containers to apply the new configuration.
+### Pacemaker and Corosync Setup
+The cluster is set up using Pacemaker and Corosync. The setup script for each node ensures that the configuration is applied correctly.
+## Floating IP Configuration
+The floating IP is configured to ensure high availability. The following command is used to configure the floating IP:
+```bash
+pcs resource create FloatingIP ocf:heartbeat:IPaddr2 ip=172.20.0.5 cidr_netmask=32 nic=eth0 op monitor interval=30s
+```
+### Apache Configuration
+Each node's Apache server is configured to display custom headers for identifying the node:
+``` bash
+echo 'Header set X-Node-IP "<container ip>"' >> /etc/apache2/sites-available/000-default.conf
+service apache2 restart
+```
+
