@@ -28,7 +28,7 @@ This project aims to simplify the deployment of a high availability (HA) cluster
 
 1. Clone the repository:
     ```bash
-    git clone git@github.com:Meir-Moore/pacemaker-corosync-docker.git
+    https://github.com/Meir-Moore/pacemaker-corosync-docker.git
     cd pacemaker-corosync-docker
     ```
 
